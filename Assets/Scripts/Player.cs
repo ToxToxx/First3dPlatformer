@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5;
     [SerializeField] private float jumpForce = 50f;
-    [SerializeField] private GameInput gameInput; 
+    [SerializeField] private GameInput gameInput;
+
 
     private Rigidbody rb;
 
@@ -36,10 +37,6 @@ public class Player : MonoBehaviour
         Vector3 moveDir = new Vector3(inputVector.x, inputVector.y, 0f);
         transform.position += moveDir * moveSpeed * Time.deltaTime;
 
-
-        float rotateSpeed = 10f;
-        transform.up = Vector3.Slerp(transform.up, moveDir, Time.deltaTime * rotateSpeed);
-    
     }
 
     public bool IsWalking()
