@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class GameInput : MonoBehaviour
 {
     public static GameInput Instance { get; private set; }
+    public event EventHandler OnShiftPressed;
     public event EventHandler OnSpacePressed;
 
     private PlayerInputActions playerInputActions;
@@ -16,6 +17,7 @@ public class GameInput : MonoBehaviour
         Instance = this;
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+        playerInputActions.Player.Run.performed += Run_performed;
         playerInputActions.Player.Jump.performed += Jump_performed;
 
 
@@ -23,7 +25,12 @@ public class GameInput : MonoBehaviour
 
     private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnSpacePressed?.Invoke(this, EventArgs.Empty);
+        OnSpacePressed?.Invoke(this,EventArgs.Empty);
+    }
+
+    private void Run_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnShiftPressed?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetMovementVectorNormalized()

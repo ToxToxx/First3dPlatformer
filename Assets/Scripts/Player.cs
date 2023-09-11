@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -10,14 +11,20 @@ public class Player : MonoBehaviour
     [SerializeField] private GameInput gameInput;
 
 
+    private float maxMovingSpeed = 10;
+    private float minMovingSpeed = 5;
+    private bool isRunning;
+    private bool isWalking;
+
+
     private Rigidbody rb;
 
-
-    private bool isWalking;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gameInput.OnShiftPressed += GameInput_OnShiftPressed;
         gameInput.OnSpacePressed += GameInput_OnSpacePressed;
+        isRunning = false;
         isWalking = true;
     }
 
@@ -27,25 +34,48 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isWalking = false;
-        }         
+        }
+    }
+
+    private void GameInput_OnShiftPressed(object sender, EventArgs e)
+    {
+        
+        if (!isRunning)
+        {
+            moveSpeed = maxMovingSpeed;
+            isRunning = true;
+        }
+        else
+        {
+            moveSpeed = minMovingSpeed;
+            isRunning = false;
+        }        
     }
 
     private void Update()
     {
-      
-        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-        Vector3 moveDir = new Vector3(inputVector.x, inputVector.y, 0f);
-        transform.position += moveDir * moveSpeed * Time.deltaTime;
-
+        HandleMovement();
+        
     }
 
     public bool IsWalking()
     {
         return isWalking;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         isWalking = true;
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, inputVector.y, 0f);
+        transform.position += moveDir * moveSpeed * Time.deltaTime;
+
+        float rotateSpeed = 10f;
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
 
 }
