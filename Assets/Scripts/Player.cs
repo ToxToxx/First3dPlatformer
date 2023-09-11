@@ -9,11 +9,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 5;
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private float maxMovingSpeedCoef = 1.5f;
 
 
-    private float maxMovingSpeed = 10;
-    private float minMovingSpeed = 5;
+    private float maxMovingSpeed;
+    private float minMovingSpeed = 5f;
+
     private bool isRunning;
+
     private bool isWalking;
 
 
@@ -26,6 +29,9 @@ public class Player : MonoBehaviour
         gameInput.OnSpacePressed += GameInput_OnSpacePressed;
         isRunning = false;
         isWalking = true;
+        maxMovingSpeed = moveSpeed * maxMovingSpeedCoef;
+        minMovingSpeed = moveSpeed;
+
     }
 
     private void GameInput_OnSpacePressed(object sender, EventArgs e)
@@ -48,8 +54,9 @@ public class Player : MonoBehaviour
         else
         {
             moveSpeed = minMovingSpeed;
-            isRunning = false;
-        }        
+            isRunning = false;                   
+        }
+       
     }
 
     private void Update()
@@ -74,8 +81,6 @@ public class Player : MonoBehaviour
         Vector3 moveDir = new Vector3(inputVector.x, inputVector.y, 0f);
         transform.position += moveDir * moveSpeed * Time.deltaTime;
 
-        float rotateSpeed = 10f;
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
 
 }
