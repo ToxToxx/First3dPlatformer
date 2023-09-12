@@ -8,10 +8,6 @@ public class FloatingPlatforms : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
 
 
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -19,18 +15,22 @@ public class FloatingPlatforms : MonoBehaviour
         gameObjectPatrollinglogic.Patrolling(moveSpeed);
     }
 
-    private void OnCollisionEnter(Collision collision)
+  
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.GetComponent<Player>())
+        if (other.gameObject.GetComponent<Player>())
         {
-            collision.gameObject.transform.SetParent(transform, true);
+            other.gameObject.transform.SetParent(transform, true);
+           
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.GetComponent<Player>())
+        if (other.gameObject.GetComponent<Player>())
         {
-            collision.gameObject.transform.SetParent(transform, false);
+            other.gameObject.transform.SetParent(null);
+
         }
     }
 }
