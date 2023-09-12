@@ -33,4 +33,12 @@ public class Enemy : MonoBehaviour
             targetPoint = 0;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Player>())
+        {
+           Destroy(collision.gameObject);
+        }
+    }
 }
