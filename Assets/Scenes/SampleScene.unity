@@ -1920,6 +1920,9 @@ MonoBehaviour:
   jumpForce: 425
   gameInput: {fileID: 776252160}
   maxMovingSpeedCoef: 1.5
+  JetpackForceCoef: 5
+  flyingTimer: 0
+  isFlying: 0
 --- !u!54 &1548046402
 Rigidbody:
   m_ObjectHideFlags: 0

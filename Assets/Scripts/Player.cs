@@ -11,12 +11,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private float maxMovingSpeedCoef = 1.5f;
+    [SerializeField] private float JetpackForceCoef = 100f;
 
 
     private float maxMovingSpeed;
     private float minMovingSpeed = 5f;
+    private float maxFlyingTimer = 2f;
+    [SerializeField]private float flyingTimer = 0;
+
 
     private bool isRunning;
+   [SerializeField] private bool isFlying;
+    
 
     private bool isWalking;
 
@@ -37,6 +43,7 @@ public class Player : MonoBehaviour
         isRunning = false;
         isWalking = true;
         isJumping = false;
+        isFlying = false;
         maxMovingSpeed = moveSpeed * maxMovingSpeedCoef;
         minMovingSpeed = moveSpeed;
 
@@ -54,7 +61,7 @@ public class Player : MonoBehaviour
 
     public void BouncePlayer(float playerBounceCoef)
     {
-        rb.AddForce(Vector3.up *   playerBounceCoef, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * playerBounceCoef, ForceMode.Impulse);
     }
 
     private void GameInput_OnShiftPressed(object sender, EventArgs e)
@@ -76,7 +83,9 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HandleMovement();
-        
+        JetpackLaunch();
+
+
     }
 
     public bool IsWalking()
@@ -98,10 +107,44 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-        Vector3 moveDir = new Vector3(inputVector.x, inputVector.y, 0f);
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, 0f);
         isWalking = moveDir != Vector3.zero;
         transform.position += moveSpeed * Time.deltaTime * moveDir;
 
+    }
+
+    private void JetpackLaunch()
+    {
+        if (!isFlying && flyingTimer <= 0.5 && isJumping)
+        {
+            isFlying = true;
+            
+        }
+        else if (isFlying)
+        {
+
+            Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+            Vector3 moveDir = new Vector3(0f, inputVector.y, 0f);
+            transform.position += JetpackForceCoef * Time.deltaTime * moveDir;
+            flyingTimer += Time.deltaTime;
+            if (flyingTimer > maxFlyingTimer)
+            {
+                isFlying = false;
+            }
+            
+        } else if (!isFlying)
+        {
+            if(flyingTimer > 0)
+            {
+                flyingTimer -= Time.deltaTime;
+            }
+            else
+            {
+                flyingTimer = 0;
+            }
+            
+        }
+        
     }
 
 }
