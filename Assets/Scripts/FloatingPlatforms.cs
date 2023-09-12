@@ -6,7 +6,7 @@ public class FloatingPlatforms : MonoBehaviour
 {
     [SerializeField] private GameObjectPatrollingLogic gameObjectPatrollinglogic;
     [SerializeField] private float moveSpeed = 10f;
-    [SerializeField] private float playerBounceCoef = 0.25f;
+
 
 
 
@@ -26,15 +26,14 @@ public class FloatingPlatforms : MonoBehaviour
         if (other.gameObject.GetComponent<Player>())
         {
 
-            other.transform.parent = transform;
-            Player.Instance.BouncePlayer(playerBounceCoef);
+            other.gameObject.transform.SetParent(transform);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<Player>())
         {
-            other.transform.parent = null;
+            other.gameObject.transform.SetParent(null);
             
         }
     }

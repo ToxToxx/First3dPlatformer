@@ -40,10 +40,12 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gameInput.OnShiftPressed += GameInput_OnShiftPressed;
         gameInput.OnSpacePressed += GameInput_OnSpacePressed;
+
         isRunning = false;
         isWalking = true;
         isJumping = false;
         isFlying = false;
+
         maxMovingSpeed = moveSpeed * maxMovingSpeedCoef;
         minMovingSpeed = moveSpeed;
 
@@ -59,10 +61,6 @@ public class Player : MonoBehaviour
         
     }
 
-    public void BouncePlayer(float playerBounceCoef)
-    {
-        rb.AddForce(Vector3.up * playerBounceCoef, ForceMode.Impulse);
-    }
 
     private void GameInput_OnShiftPressed(object sender, EventArgs e)
     {
@@ -84,8 +82,6 @@ public class Player : MonoBehaviour
     {
         HandleMovement();
         JetpackLaunch();
-
-
     }
 
     public bool IsWalking()
