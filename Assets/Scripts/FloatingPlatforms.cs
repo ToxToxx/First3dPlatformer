@@ -6,6 +6,7 @@ public class FloatingPlatforms : MonoBehaviour
 {
     [SerializeField] private GameObjectPatrollingLogic gameObjectPatrollinglogic;
     [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float playerBounceCoef = 0.25f;
     private Transform playerOnPlatform;
 
 
@@ -40,7 +41,7 @@ public class FloatingPlatforms : MonoBehaviour
         {
             playerOnPlatform.SetParent(null);
             playerOnPlatform = null;
-            Player.Instance.BouncePlayer();
+            Player.Instance.BouncePlayer(playerBounceCoef);
         }
     }
 }

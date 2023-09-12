@@ -269,8 +269,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10.057434, y: 1.7870922, z: 1}
-  m_Center: {x: 0.031234741, y: 0.050376892, z: 0}
+  m_Size: {x: 9.712166, y: 1.6043024, z: 1}
+  m_Center: {x: -0.019542694, y: -0.04101801, z: 0}
 --- !u!65 &5945176375974669906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -306,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectPatrollinglogic: {fileID: 6512091191421333824}
   moveSpeed: 10
+  playerBounceCoef: 25
 --- !u!1 &6430638822956564546
 GameObject:
   m_ObjectHideFlags: 0

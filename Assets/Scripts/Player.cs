@@ -52,9 +52,9 @@ public class Player : MonoBehaviour
         
     }
 
-    public void BouncePlayer()
+    public void BouncePlayer(float playerBounceCoef)
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.up *   playerBounceCoef, ForceMode.Impulse);
     }
 
     private void GameInput_OnShiftPressed(object sender, EventArgs e)
