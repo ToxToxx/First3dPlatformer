@@ -19,22 +19,24 @@ public class FloatingPlatforms : MonoBehaviour
 
     }
 
-   
 
-    private void OnTriggerEnter(Collider other)
+  
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.GetComponent<Player>())
+        if (collision.gameObject.GetComponent<Player>())
         {
 
-            other.gameObject.transform.SetParent(transform);
+            collision.gameObject.transform.SetParent(transform);
         }
+
     }
-    private void OnTriggerExit(Collider other)
+
+    private void OnCollisionExit(Collision collision)
     {
-        if (other.gameObject.GetComponent<Player>())
+        if (collision.gameObject.GetComponent<Player>())
         {
-            other.gameObject.transform.SetParent(null);
-            
+            collision.gameObject.transform.SetParent(null);
+
         }
     }
 }

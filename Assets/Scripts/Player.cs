@@ -7,11 +7,14 @@ using UnityEngine.EventSystems;
 public class Player : MonoBehaviour
 {
     public static Player Instance {  get; private set; }
+
     [SerializeField] private float moveSpeed = 5;
+    [SerializeField] private float rotatingSpeed = 60;
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private float maxMovingSpeedCoef = 1.5f;
     [SerializeField] private float JetpackForceCoef = 100f;
+    [SerializeField] private Transform playerVisual;
 
 
     private float maxMovingSpeed;
@@ -25,18 +28,18 @@ public class Player : MonoBehaviour
     
 
     private bool isWalking;
-
     private bool isJumping;
 
 
     private Rigidbody rb;
-
+   
     private void Awake()
     {
         Instance = this;
     }
     private void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         gameInput.OnShiftPressed += GameInput_OnShiftPressed;
         gameInput.OnSpacePressed += GameInput_OnSpacePressed;
@@ -82,11 +85,16 @@ public class Player : MonoBehaviour
     {
         HandleMovement();
         JetpackLaunch();
+        
     }
 
-    public bool IsWalking()
+    public bool GetIsWalking()
     {
         return isWalking;
+    }
+    public bool GetIsFlying()
+    {
+        return isFlying;
     }
 
     public bool SetWalking(bool parameter)
@@ -105,7 +113,14 @@ public class Player : MonoBehaviour
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, 0f);
         isWalking = moveDir != Vector3.zero;
+        
         transform.position += moveSpeed * Time.deltaTime * moveDir;
+        if(moveDir != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotatingSpeed * Time.deltaTime);
+        }
+        
 
     }
 
@@ -142,5 +157,7 @@ public class Player : MonoBehaviour
         }
         
     }
+
+    
 
 }
