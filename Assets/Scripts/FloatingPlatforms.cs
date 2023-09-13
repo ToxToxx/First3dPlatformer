@@ -15,8 +15,6 @@ public class FloatingPlatforms : MonoBehaviour
     void Update()
     {
         gameObjectPatrollinglogic.Patrolling(moveSpeed);
-
-
     }
 
 

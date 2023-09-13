@@ -16,10 +16,6 @@ public class GameObjectPatrollingLogic : MonoBehaviour
         targetPoint = 0;
     }
 
-    private void Update()
-    {        
-        
-    }
 
     public void Patrolling(float moveSpeed)
     {
@@ -29,6 +25,11 @@ public class GameObjectPatrollingLogic : MonoBehaviour
             IncreaseTargetInt();
         }
         transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
+    }
+
+    public Vector3 GetTransformPosition()
+    {
+        return transform.position;
     }
 
     private void IncreaseTargetInt()

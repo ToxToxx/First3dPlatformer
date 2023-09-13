@@ -7,8 +7,7 @@ public class PlayerAnimator : MonoBehaviour
     private Animator playerAnimator;
 
     private const string IS_WALKING_ANIMATION = "IsWalking";
-    [SerializeField] private GameObject onJetpackVisual;
-    [SerializeField] private GameObject offJetpackVisual;
+
 
     private void Start()
     {
@@ -18,7 +17,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         StartWalking();
-        StartFlyingJetpack();
+        
     }
 
     private void StartWalking()
@@ -33,17 +32,5 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    private void StartFlyingJetpack()
-    {
-        if (Player.Instance.GetIsFlying())
-        {
-            onJetpackVisual.SetActive(true);
-            offJetpackVisual.SetActive(false);
-        }
-        else
-        {
-            onJetpackVisual.SetActive(false);
-            offJetpackVisual.SetActive(true);
-        }
-    }
+    
 }

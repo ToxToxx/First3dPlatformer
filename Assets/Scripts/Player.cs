@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 5;
     [SerializeField] private float rotatingSpeed = 60;
     [SerializeField] private float jumpForce = 50f;
-    [SerializeField] private GameInput gameInput;
     [SerializeField] private float maxMovingSpeedCoef = 1.5f;
     [SerializeField] private float JetpackForceCoef = 100f;
+    [SerializeField] private GameInput gameInput; 
     [SerializeField] private Transform playerVisual;
 
 
@@ -44,10 +44,10 @@ public class Player : MonoBehaviour
         gameInput.OnShiftPressed += GameInput_OnShiftPressed;
         gameInput.OnSpacePressed += GameInput_OnSpacePressed;
 
-        isRunning = false;
-        isWalking = true;
+        isRunning = false;   
         isJumping = false;
         isFlying = false;
+        isWalking = true;
 
         maxMovingSpeed = moveSpeed * maxMovingSpeedCoef;
         minMovingSpeed = moveSpeed;
@@ -157,7 +157,4 @@ public class Player : MonoBehaviour
         }
         
     }
-
-    
-
 }

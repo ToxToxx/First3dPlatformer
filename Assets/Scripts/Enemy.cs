@@ -6,17 +6,13 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObjectPatrollingLogic gameObjectPatrollinglogic;
     [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float rotatingSpeed = 60;
 
-
-    private void Start()
-    {
-
-
-    }
 
     private void Update()
     {
         gameObjectPatrollinglogic.Patrolling(moveSpeed);
+        RotateEnemy();
 
     }
 
@@ -26,6 +22,16 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>())
         {
            Destroy(collision.gameObject);
+        }
+    }
+    private void RotateEnemy()
+    {
+        Vector3 moveDir = gameObjectPatrollinglogic.GetTransformPosition();
+
+        if (moveDir != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotatingSpeed * Time.deltaTime);
         }
     }
 }
