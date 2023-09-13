@@ -368,6 +368,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174384286}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &174906191 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2439031953866182505, guid: 43b55345ebcd56d40a5fac7a54fb92e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5237669852270998534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &202288369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1778,33 +1784,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onJetpackVisual: {fileID: 174384286}
   offJetpackVisual: {fileID: 5185738}
---- !u!1 &1285974103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3845818450874394758, guid: 43b55345ebcd56d40a5fac7a54fb92e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 5237669852270998534}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1285974109
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1285974103}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 56fc0b4f7d154039a7099564596a545b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9bbcf96c9a254c5ba654027c656d7b39, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1294076046
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,6 +2086,7 @@ MonoBehaviour:
   JetpackForceCoef: 7
   gameInput: {fileID: 776252160}
   playerVisual: {fileID: 607825733}
+  maxFlyingTimer: 2
   flyingTimer: 0
   isFlying: 0
 --- !u!54 &1548046402
@@ -2774,14 +2754,9 @@ PrefabInstance:
       objectReference: {fileID: 1993669662}
     - target: {fileID: 2495128470474072712, guid: 43b55345ebcd56d40a5fac7a54fb92e7,
         type: 3}
-      propertyPath: rotatingSpeed
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 3067793637320758739, guid: 43b55345ebcd56d40a5fac7a54fb92e7,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyVisual
-      objectReference: {fileID: 0}
+      propertyPath: enemyVisual
+      value: 
+      objectReference: {fileID: 174906191}
     - target: {fileID: 3845818450874394758, guid: 43b55345ebcd56d40a5fac7a54fb92e7,
         type: 3}
       propertyPath: m_Name
@@ -2837,16 +2812,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8590900475173836051, guid: 43b55345ebcd56d40a5fac7a54fb92e7, type: 3}
-    m_RemovedGameObjects:
-    - {fileID: 5340041092103102141, guid: 43b55345ebcd56d40a5fac7a54fb92e7, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3845818450874394758, guid: 43b55345ebcd56d40a5fac7a54fb92e7,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1285974109}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43b55345ebcd56d40a5fac7a54fb92e7, type: 3}
 --- !u!1001 &5334810640446613808
 PrefabInstance:

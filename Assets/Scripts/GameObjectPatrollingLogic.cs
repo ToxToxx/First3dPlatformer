@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class GameObjectPatrollingLogic : MonoBehaviour
 {
     [SerializeField] private Transform[] patrolPoints;
+   
     
 
     private int targetPoint;
@@ -23,6 +25,7 @@ public class GameObjectPatrollingLogic : MonoBehaviour
         if (transform.position == patrolPoints[targetPoint].position)
         {
             IncreaseTargetInt();
+            
         }
         transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
     }
@@ -39,5 +42,10 @@ public class GameObjectPatrollingLogic : MonoBehaviour
         {
             targetPoint = 0;
         }
+    }
+
+    public int GetTargetPoint()
+    {
+        return targetPoint;
     }
 }

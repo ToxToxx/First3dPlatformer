@@ -13,8 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private float maxMovingSpeedCoef = 1.5f;
     [SerializeField] private float JetpackForceCoef = 100f;
-    [SerializeField] private GameInput gameInput; 
-    [SerializeField] private Transform playerVisual;
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private Transform playerVisual; 
+   
 
 
     private float maxMovingSpeed;
