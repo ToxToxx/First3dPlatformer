@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     private float maxMovingSpeed;
     private float minMovingSpeed = 5f;
-    private float maxFlyingTimer = 2f;
+    [SerializeField]private float maxFlyingTimer = 2f;
     [SerializeField]private float flyingTimer = 0;
 
 
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     private bool isWalking;
     private bool isJumping;
+    private bool isOnEarth;
 
 
     private Rigidbody rb;
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
         isJumping = false;
         isFlying = false;
         isWalking = true;
+        isOnEarth = false;
 
         maxMovingSpeed = moveSpeed * maxMovingSpeedCoef;
         minMovingSpeed = moveSpeed;
@@ -60,6 +62,11 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping=true;
+            isOnEarth = false;
+            if(!isFlying && flyingTimer <= 0.1 && !isOnEarth)
+            {
+                isFlying = true;
+            }
         }
         
     }
@@ -95,6 +102,10 @@ public class Player : MonoBehaviour
     public bool GetIsFlying()
     {
         return isFlying;
+    } 
+    public bool GetIsJumping()
+    {
+        return isJumping;
     }
 
     public bool SetWalking(bool parameter)
@@ -106,6 +117,8 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         isJumping = false;
+        isOnEarth = true;
+
     }
 
     private void HandleMovement()
@@ -126,12 +139,8 @@ public class Player : MonoBehaviour
 
     private void JetpackLaunch()
     {
-        if (!isFlying && flyingTimer <= 0.5 && isJumping)
-        {
-            isFlying = true;
-            
-        }
-        else if (isFlying)
+        
+        if (isFlying)
         {
 
             Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
