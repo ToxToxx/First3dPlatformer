@@ -7,7 +7,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObjectPatrollingLogic gameObjectPatrollinglogic;
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float rotatingSpeed = 60;
-    private int currentPoint;
+    [SerializeField] private int currentPoint;
+
 
     private void Start()
     {
@@ -20,8 +21,9 @@ public class Enemy : MonoBehaviour
         
         if(gameObjectPatrollinglogic.GetTargetPoint() != currentPoint)
         {
-            RotateEnemy();
+            
             currentPoint = gameObjectPatrollinglogic.GetTargetPoint();
+            RotateEnemy();
         }
 
     }
@@ -34,7 +36,7 @@ public class Enemy : MonoBehaviour
            Destroy(collision.gameObject);
         }
     }
-    private void RotateEnemy()
+   private void RotateEnemy()
     {
         
         Vector3 moveDir = gameObjectPatrollinglogic.transform.position;

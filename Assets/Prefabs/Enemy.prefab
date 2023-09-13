@@ -310,7 +310,8 @@ MonoBehaviour:
   gameObjectPatrollinglogic: {fileID: 841240271664073952}
   moveSpeed: 10
   rotatingSpeed: 60
-  enemyVisual: {fileID: 0}
+  currentPoint: 0
+  enemyVisual: {fileID: 2439031953866182505}
 --- !u!114 &841240271664073952
 MonoBehaviour:
   m_ObjectHideFlags: 0

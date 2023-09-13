@@ -7,7 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Coin : MonoBehaviour
 {
-    public static event EventHandler OnCoinDestroyed;
+
     [SerializeField] private int scorePoints;
 
 
