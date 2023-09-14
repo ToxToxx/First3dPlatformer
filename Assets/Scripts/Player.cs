@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform playerVisual; 
    
 
-
     private float maxMovingSpeed;
     private float minMovingSpeed = 5f;
     [SerializeField]private float maxFlyingTimer = 2f;
