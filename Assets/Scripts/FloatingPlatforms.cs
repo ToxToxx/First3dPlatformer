@@ -8,10 +8,6 @@ public class FloatingPlatforms : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
 
 
-
-
-
-    // Update is called once per frame
     void Update()
     {
         gameObjectPatrollinglogic.Patrolling(moveSpeed);

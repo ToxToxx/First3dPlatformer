@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 129360934}
   - component: {fileID: 129360933}
   m_Layer: 0
-  m_Name: Bacckground
+  m_Name: BackgroundImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1721,7 +1721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &480438634
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2475,7 +2475,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -105}
+  m_AnchoredPosition: {x: 225, y: -105}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &808748931
@@ -3541,6 +3541,7 @@ MonoBehaviour:
   jetpackForceCoef: 15
   gameInput: {fileID: 776252160}
   playerVisual: {fileID: 607825733}
+  movementVectorY: 0
   maxFlyingTimer: 2
   flyingTimer: 0
   isFlying: 0

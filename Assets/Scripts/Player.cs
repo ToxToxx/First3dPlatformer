@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, 0f);
+        Vector3 moveDir = new(inputVector.x, 0f, 0f);
         isWalking = moveDir != Vector3.zero;
         
         transform.position += moveSpeed * Time.deltaTime * moveDir;
