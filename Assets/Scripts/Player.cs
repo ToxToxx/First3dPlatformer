@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotatingSpeed = 60;
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private float maxMovingSpeedCoef = 1.5f;
-    [SerializeField] private float JetpackForceCoef = 100f;
+    [SerializeField] private float jetpackForceCoef = 100f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform playerVisual; 
    
@@ -109,6 +109,16 @@ public class Player : MonoBehaviour
         return isJumping;
     }
 
+    public void SetJetpackMaxTimer(float jetpackBuff)
+    {       
+        this.maxFlyingTimer += jetpackBuff;
+    }
+    public float GetJetpackMaxTimer( )
+    {
+        
+        return maxFlyingTimer;
+    }
+
     public bool SetWalking(bool parameter)
     {
         isWalking = parameter;
@@ -146,7 +156,7 @@ public class Player : MonoBehaviour
 
             Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
             Vector3 moveDir = new Vector3(0f, inputVector.y, 0f);
-            transform.position += JetpackForceCoef * Time.deltaTime * moveDir;
+            transform.position += jetpackForceCoef * Time.deltaTime * moveDir;
             flyingTimer += Time.deltaTime;
             if (flyingTimer > maxFlyingTimer)
             {
