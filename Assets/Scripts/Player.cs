@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxMovingSpeedCoef = 1.5f;
     [SerializeField] private float jetpackForceCoef = 100f;
     [SerializeField] private GameInput gameInput;
-    [SerializeField] private Transform playerVisual; 
+    [SerializeField] private Transform playerVisual;
+    [SerializeField] private float movementVectorY;
    
 
     private float maxMovingSpeed;
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
         maxMovingSpeed = moveSpeed * maxMovingSpeedCoef;
         minMovingSpeed = moveSpeed;
 
+
     }
 
     private void GameInput_OnSpacePressed(object sender, EventArgs e)
@@ -63,10 +65,8 @@ public class Player : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping=true;
             isOnEarth = false;
-            if(!isFlying && flyingTimer <= 0.1 && !isOnEarth)
-            {
-                isFlying = true;
-            }
+            
+            
         }
         
     }
@@ -106,6 +106,11 @@ public class Player : MonoBehaviour
     public bool GetIsJumping()
     {
         return isJumping;
+    }
+
+    public bool GetIsOnEarth()
+    {
+        return isOnEarth;
     }
 
     public void SetJetpackMaxTimer(float jetpackBuff)
@@ -149,7 +154,12 @@ public class Player : MonoBehaviour
 
     private void JetpackLaunch()
     {
-        
+        movementVectorY = GameInput.Instance.GetMovementVectorNormalized().y;
+        if (movementVectorY >= 0.1 && !isFlying && flyingTimer <= 0.1 && !isOnEarth)
+        {
+            isFlying = true;
+        }
+
         if (isFlying)
         {
 

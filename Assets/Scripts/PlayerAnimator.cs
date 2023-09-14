@@ -37,7 +37,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void StartFlying()
     {
-        if (Player.Instance.GetIsFlying() || Player.Instance.GetIsJumping())
+        if (Player.Instance.GetIsOnEarth())
         {
             playerAnimator.SetBool(IS_FLYING_ANIMATION, true);
         }

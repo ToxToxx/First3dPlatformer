@@ -24,5 +24,6 @@ public class DeathOfPlayer : MonoBehaviour
     private void OnDestroy()
     {
         deathScreen.SetActive(true);
+        Time.timeScale = 0;
     }
 }
