@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
 
     private bool isRunning;
-    [SerializeField] private bool isFlying;
+
 
 
     private bool isWalking;
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
 
         isRunning = false;
         isJumping = false;
-        isFlying = false;
+
         isWalking = true;
         isOnEarth = false;
 
@@ -92,10 +92,7 @@ public class Player : MonoBehaviour
     {
         return isWalking;
     }
-    public bool GetIsFlying()
-    {
-        return isFlying;
-    }
+
     public bool GetIsJumping()
     {
         return isJumping;
@@ -107,11 +104,6 @@ public class Player : MonoBehaviour
     }
 
     public bool SetWalking(bool parameter)
-    {
-        isWalking = parameter;
-        return isWalking;
-    }
-    public bool SetIsFlying(bool parameter)
     {
         isWalking = parameter;
         return isWalking;

@@ -3896,6 +3896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1548046400}
   - component: {fileID: 1548046401}
+  - component: {fileID: 1548046405}
   - component: {fileID: 1548046402}
   - component: {fileID: 1548046403}
   - component: {fileID: 1548046404}
@@ -3939,13 +3940,8 @@ MonoBehaviour:
   rotatingSpeed: 360
   jumpForce: 450
   maxMovingSpeedCoef: 1.5
-  jetpackForceCoef: 15
   gameInput: {fileID: 776252160}
   playerVisual: {fileID: 607825733}
-  movementVectorY: 0
-  maxFlyingTimer: 2
-  flyingTimer: 0
-  isFlying: 0
 --- !u!54 &1548046402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4017,6 +4013,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1548046405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548046399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6633d59dba0be5648b0aad41fc6f6a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFlyingTimer: 2
+  flyingTimer: 0
+  jetpackForceCoef: 25
+  movementVectorY: 0
+  isFlying: 0
 --- !u!4 &1553431783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 859650237314862195, guid: 95d4b3732921a2c49b8a5c02a2221d29,

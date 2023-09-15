@@ -16,7 +16,7 @@ public class JetpackVisual : MonoBehaviour
 
     private void StartFlyingJetpack()
     {
-        if (Player.Instance.GetIsFlying())
+        if (PlayersJetpackLogic.Instance.GetIsFLying())
         {
             onJetpackVisual.SetActive(true);
             offJetpackVisual.SetActive(false);

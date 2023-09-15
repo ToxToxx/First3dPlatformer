@@ -21,11 +21,18 @@ public class DeathOfPlayer : MonoBehaviour
     }
 
     void Update()
-    { 
-        if (player.transform.position.y < -40)
+    {
+        if (player.IsDestroyed())
         {
-            GameOver();
         }
+        else
+        {
+            if (player.transform.position.y < -40)
+            {
+                GameOver();
+            }
+        }
+        
     }
     private void GameOver()
     {

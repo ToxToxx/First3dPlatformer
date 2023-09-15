@@ -5,14 +5,19 @@ using UnityEngine;
 public class PlayersJetpackLogic : MonoBehaviour
 {
     public static PlayersJetpackLogic Instance;
+
     [SerializeField] private float maxFlyingTimer = 2f;
     [SerializeField] private float flyingTimer = 0;
     [SerializeField] private float jetpackForceCoef = 100f;
     [SerializeField] private float movementVectorY;
-
+    [SerializeField] private bool isFlying;
     private void Awake()
     {
         Instance = this;
+    }
+    private void Start()
+    {
+        isFlying = false;
     }
     void Update()
     {
@@ -23,18 +28,18 @@ public class PlayersJetpackLogic : MonoBehaviour
     {
         if (Player.Instance.GetIsOnEarth())
         {
-            Player.Instance.SetIsFlying(false);
+            isFlying = false;
             ReduceFlyingTimer();
         }
         else
         {
             movementVectorY = GameInput.Instance.GetMovementVectorNormalized().y;
-            if (movementVectorY >= 0.1 && !Player.Instance.GetIsFlying() && flyingTimer <= 0.1)
+            if (movementVectorY >= 0.1 && !isFlying && flyingTimer <= 0.1)
             {
-                Player.Instance.SetIsFlying(true);
+                isFlying = true;
             }
 
-            if (Player.Instance.GetIsFlying())
+            if (isFlying)
             {
 
                 Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
@@ -43,11 +48,11 @@ public class PlayersJetpackLogic : MonoBehaviour
                 flyingTimer += Time.deltaTime;
                 if (flyingTimer > maxFlyingTimer)
                 {
-                    Player.Instance.SetIsFlying(false);
+                    isFlying = false;
                 }
 
             }
-            else if (!Player.Instance.GetIsFlying())
+            else if (!isFlying)
             {
 
                 ReduceFlyingTimer();
@@ -83,5 +88,9 @@ public class PlayersJetpackLogic : MonoBehaviour
     public float GetMaxFlyingTimer()
     {
         return maxFlyingTimer;
+    }
+    public bool GetIsFLying()
+    {
+        return isFlying;
     }
 }
