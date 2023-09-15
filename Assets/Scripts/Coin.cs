@@ -5,23 +5,22 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class CollectibleItem : MonoBehaviour
+public class Coin : CollectibleItem
 {
-
-    [SerializeField] protected int scorePoints;
-
-
- 
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Player>())
         {
             Destroy(gameObject);
-            PlayerScore.Instance.score += scorePoints;
-
+            PlayerScore.Instance.score += scorePoints;        
         }
     }
 
+    private void OnDestroy()
+    {
+        CoinManager.Instance.CoinDestroyed();
+    }
 
 
 }
