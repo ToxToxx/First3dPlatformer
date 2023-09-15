@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f)
+    private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 10f)
     {
         AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier * _volume);
     }
