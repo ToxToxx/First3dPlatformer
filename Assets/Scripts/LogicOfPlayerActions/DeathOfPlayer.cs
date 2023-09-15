@@ -22,7 +22,7 @@ public class DeathOfPlayer : MonoBehaviour
 
     void Update()
     {
-        if (player.IsDestroyed())
+        if (player.gameObject == null)
         {
         }
         else
@@ -32,7 +32,6 @@ public class DeathOfPlayer : MonoBehaviour
                 GameOver();
             }
         }
-        
     }
     private void GameOver()
     {

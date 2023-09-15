@@ -11,6 +11,7 @@ public class PlayersJetpackLogic : MonoBehaviour
     [SerializeField] private float jetpackForceCoef = 100f;
     [SerializeField] private float movementVectorY;
     [SerializeField] private bool isFlying;
+
     private void Awake()
     {
         Instance = this;

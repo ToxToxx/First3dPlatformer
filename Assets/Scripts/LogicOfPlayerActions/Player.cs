@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -16,19 +17,13 @@ public class Player : MonoBehaviour
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform playerVisual;
 
-
     private float maxMovingSpeed;
     private float minMovingSpeed = 5f;
 
-
     private bool isRunning;
-
-
-
     private bool isWalking;
     private bool isJumping;
     private bool isOnEarth;
-
 
     private Rigidbody rb;
 
@@ -45,13 +40,11 @@ public class Player : MonoBehaviour
 
         isRunning = false;
         isJumping = false;
-
         isWalking = true;
         isOnEarth = false;
 
         maxMovingSpeed = moveSpeed * maxMovingSpeedCoef;
         minMovingSpeed = moveSpeed;
-
 
     }
 
@@ -65,7 +58,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
 
     private void GameInput_OnShiftPressed(object sender, EventArgs e)
     {
@@ -85,7 +77,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
+        if (!gameObject.IsDestroyed())
+        {
+            HandleMovement();
+        }
+        
     }
 
     public bool GetIsWalking()

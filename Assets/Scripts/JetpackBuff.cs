@@ -8,9 +8,8 @@ public class JetpackBuff : CollectibleItem
 
     private void BuffJetpack()
     {
-        PlayersJetpackLogic.Instance.SetJetpackMaxTimer(jetpackBuffCoef);       
+        PlayersJetpackLogic.Instance.SetJetpackMaxTimer(jetpackBuffCoef);
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,7 +18,7 @@ public class JetpackBuff : CollectibleItem
             Destroy(gameObject);
             PlayerScore.Instance.score += scorePoints;
             BuffJetpack();
-            
+
         }
     }
 }

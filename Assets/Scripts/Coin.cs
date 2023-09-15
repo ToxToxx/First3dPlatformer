@@ -7,13 +7,12 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Coin : CollectibleItem
 {
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Player>())
         {
             Destroy(gameObject);
-            PlayerScore.Instance.score += scorePoints;        
+            PlayerScore.Instance.score += scorePoints;
         }
     }
 
@@ -21,6 +20,4 @@ public class Coin : CollectibleItem
     {
         CoinManager.Instance.CoinDestroyed();
     }
-
-
 }

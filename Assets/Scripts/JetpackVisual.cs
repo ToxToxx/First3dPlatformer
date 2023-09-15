@@ -6,8 +6,6 @@ public class JetpackVisual : MonoBehaviour
 {
     [SerializeField] private GameObject onJetpackVisual;
     [SerializeField] private GameObject offJetpackVisual;
-   
-
 
     void Update()
     {

@@ -10,6 +10,5 @@ public class PlayerTimeFlyingProgressionUI : MonoBehaviour
     private void Update()
     {
         playerTimeFlyTextUI.text = "Max Time Flying: " + PlayersJetpackLogic.Instance.GetMaxFlyingTimer();
-
     }
 }
