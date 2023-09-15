@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class PlayersJetpackLogic : MonoBehaviour
 {
     public static PlayersJetpackLogic Instance;
+    public event EventHandler OnJeptackLaunch;
 
     [SerializeField] private float maxFlyingTimer = 2f;
     [SerializeField] private float flyingTimer = 0;
@@ -38,11 +40,12 @@ public class PlayersJetpackLogic : MonoBehaviour
             if (movementVectorY >= 0.1 && !isFlying && flyingTimer <= 0.1)
             {
                 isFlying = true;
+                OnJeptackLaunch?.Invoke(this, EventArgs.Empty);
+
             }
 
             if (isFlying)
-            {
-
+            {              
                 Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
                 Vector3 moveDir = new(0f, inputVector.y, 0f);
                 transform.position += jetpackForceCoef * Time.deltaTime * moveDir;
@@ -51,7 +54,6 @@ public class PlayersJetpackLogic : MonoBehaviour
                 {
                     isFlying = false;
                 }
-
             }
             else if (!isFlying)
             {
