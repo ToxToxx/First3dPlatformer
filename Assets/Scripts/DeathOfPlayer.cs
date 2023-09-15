@@ -8,7 +8,7 @@ public class DeathOfPlayer : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private GameObject deathScreen;
 
-    // Update is called once per frame
+ 
     private void Start()
     {
         deathScreen.SetActive(false);

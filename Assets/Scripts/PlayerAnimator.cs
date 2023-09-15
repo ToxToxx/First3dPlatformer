@@ -13,7 +13,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start()
     {
-        playerAnimator = GetComponent<Animator>();
+        playerAnimator = Player.Instance.GetComponent<Animator>();
     }
 
     private void Update()

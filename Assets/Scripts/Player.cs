@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
         {
 
             Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-            Vector3 moveDir = new Vector3(0f, inputVector.y, 0f);
+            Vector3 moveDir = new(0f, inputVector.y, 0f);
             transform.position += jetpackForceCoef * Time.deltaTime * moveDir;
             flyingTimer += Time.deltaTime;
             if (flyingTimer > maxFlyingTimer)
