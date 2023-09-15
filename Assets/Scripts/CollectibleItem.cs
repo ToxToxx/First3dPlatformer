@@ -5,10 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class Coin : MonoBehaviour
+public class CollectibleItem : MonoBehaviour
 {
 
-    [SerializeField] private int scorePoints;
+    [SerializeField] protected int scorePoints;
 
 
  
