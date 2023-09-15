@@ -7,9 +7,6 @@ public class PlayerTimeFlyingProgressionUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI playerTimeFlyTextUI;
 
-
-
-
     private void Update()
     {
         playerTimeFlyTextUI.text = "Max Time Flying: " + Player.Instance.GetJetpackMaxTimer();

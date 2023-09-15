@@ -8,22 +8,38 @@ public class DeathOfPlayer : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private GameObject deathScreen;
 
- 
+
     private void Start()
     {
-        deathScreen.SetActive(false);
-    }
-    void Update()
-    {
-        if (player.transform.position.y < -40)
-        {
-            Destroy(player.gameObject);
-        }
+        HideDeathScreen();
+        player.OnPlayerDestroyed += Player_OnPlayerDestroyed;
     }
 
-    private void OnDestroy()
+    private void Player_OnPlayerDestroyed(object sender, System.EventArgs e)
+    {
+        GameOver();
+    }
+
+    void Update()
+    { 
+        if (player.transform.position.y < -40)
+        {
+            GameOver();
+        }
+    }
+    private void GameOver()
+    {
+        Time.timeScale = 0;
+        ShowDeathScreen();
+    }
+
+
+    private void ShowDeathScreen()
     {
         deathScreen.SetActive(true);
-        Time.timeScale = 0;
+    }
+    private void HideDeathScreen()
+    {
+        deathScreen.SetActive(false);
     }
 }

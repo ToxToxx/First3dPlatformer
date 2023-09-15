@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerScore : MonoBehaviour
 {
-    public static PlayerScore Instance {  get; private set; }  
+    public static PlayerScore Instance { get; private set; }
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] public int score;
 
@@ -18,10 +18,6 @@ public class PlayerScore : MonoBehaviour
     {
         score = 0;
     }
-
-
-
-
     public int GetScore()
     {
         return score;

@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
-    public static Player Instance {  get; private set; }
+    public static Player Instance { get; private set; }
+    public event EventHandler OnPlayerDestroyed;
 
     [SerializeField] private float moveSpeed = 5;
     [SerializeField] private float rotatingSpeed = 60;
@@ -16,17 +17,17 @@ public class Player : MonoBehaviour
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform playerVisual;
     [SerializeField] private float movementVectorY;
-   
+
 
     private float maxMovingSpeed;
     private float minMovingSpeed = 5f;
-    [SerializeField]private float maxFlyingTimer = 2f;
-    [SerializeField]private float flyingTimer = 0;
+    [SerializeField] private float maxFlyingTimer = 2f;
+    [SerializeField] private float flyingTimer = 0;
 
 
     private bool isRunning;
-   [SerializeField] private bool isFlying;
-    
+    [SerializeField] private bool isFlying;
+
 
     private bool isWalking;
     private bool isJumping;
@@ -34,19 +35,19 @@ public class Player : MonoBehaviour
 
 
     private Rigidbody rb;
-   
+
     private void Awake()
     {
         Instance = this;
     }
     private void Start()
     {
-        
+
         rb = GetComponent<Rigidbody>();
         gameInput.OnShiftPressed += GameInput_OnShiftPressed;
         gameInput.OnSpacePressed += GameInput_OnSpacePressed;
 
-        isRunning = false;   
+        isRunning = false;
         isJumping = false;
         isFlying = false;
         isWalking = true;
@@ -63,18 +64,18 @@ public class Player : MonoBehaviour
         if (!isJumping)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isJumping=true;
+            isJumping = true;
             isOnEarth = false;
-            
-            
+
+
         }
-        
+
     }
 
 
     private void GameInput_OnShiftPressed(object sender, EventArgs e)
     {
-        
+
         if (!isRunning)
         {
             moveSpeed = maxMovingSpeed;
@@ -83,16 +84,16 @@ public class Player : MonoBehaviour
         else
         {
             moveSpeed = minMovingSpeed;
-            isRunning = false;                   
+            isRunning = false;
         }
-       
+
     }
 
     private void Update()
     {
         HandleMovement();
         JetpackLaunch();
-        
+
     }
 
     public bool GetIsWalking()
@@ -102,7 +103,7 @@ public class Player : MonoBehaviour
     public bool GetIsFlying()
     {
         return isFlying;
-    } 
+    }
     public bool GetIsJumping()
     {
         return isJumping;
@@ -114,12 +115,12 @@ public class Player : MonoBehaviour
     }
 
     public void SetJetpackMaxTimer(float jetpackBuff)
-    {       
+    {
         this.maxFlyingTimer += jetpackBuff;
     }
-    public float GetJetpackMaxTimer( )
+    public float GetJetpackMaxTimer()
     {
-        
+
         return maxFlyingTimer;
     }
 
@@ -141,14 +142,14 @@ public class Player : MonoBehaviour
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
         Vector3 moveDir = new(inputVector.x, 0f, 0f);
         isWalking = moveDir != Vector3.zero;
-        
+
         transform.position += moveSpeed * Time.deltaTime * moveDir;
-        if(moveDir != Vector3.zero)
+        if (moveDir != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotatingSpeed * Time.deltaTime);
         }
-        
+
 
     }
 
@@ -171,10 +172,11 @@ public class Player : MonoBehaviour
             {
                 isFlying = false;
             }
-            
-        } else if (!isFlying)
+
+        }
+        else if (!isFlying)
         {
-            if(flyingTimer > 0)
+            if (flyingTimer > 0)
             {
                 flyingTimer -= Time.deltaTime;
             }
@@ -182,8 +184,15 @@ public class Player : MonoBehaviour
             {
                 flyingTimer = 0;
             }
-            
+
         }
-        
+
+    }
+
+
+
+    private void OnDestroy()
+    {
+        OnPlayerDestroyed?.Invoke(this, EventArgs.Empty);
     }
 }
