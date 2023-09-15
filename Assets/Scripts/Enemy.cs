@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Player>())
         {
-           Destroy(collision.gameObject);
+            Player.Instance.OnPlayerDeath();
         }
     }
    private void RotateEnemy()

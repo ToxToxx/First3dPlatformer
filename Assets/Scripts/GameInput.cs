@@ -20,7 +20,14 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Run.performed += Run_performed;
         playerInputActions.Player.Jump.performed += Jump_performed;
 
+    }
+    private void OnDestroy()
+    {
 
+        playerInputActions.Player.Run.performed -= Run_performed;
+        playerInputActions.Player.Jump.performed -= Jump_performed;
+
+        playerInputActions.Dispose();
     }
 
     private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

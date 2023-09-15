@@ -22,4 +22,6 @@ public class PlayerScore : MonoBehaviour
     {
         return score;
     }
+
+
 }

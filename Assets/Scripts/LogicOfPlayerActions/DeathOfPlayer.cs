@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class DeathOfPlayer : MonoBehaviour
 {
+    public static DeathOfPlayer Instance { get; private set; }
     [SerializeField] private Player player;
     [SerializeField] private GameObject deathScreen;
 
-
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         HideDeathScreen();
@@ -33,7 +37,7 @@ public class DeathOfPlayer : MonoBehaviour
             }
         }
     }
-    private void GameOver()
+    public void GameOver()
     {
         Time.timeScale = 0;
         ShowDeathScreen();

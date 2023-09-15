@@ -81,7 +81,6 @@ public class Player : MonoBehaviour
         {
             HandleMovement();
         }
-        
     }
 
     public bool GetIsWalking()
@@ -125,7 +124,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    public void OnPlayerDeath()
     {
         OnPlayerDestroyed?.Invoke(this, EventArgs.Empty);
     }
