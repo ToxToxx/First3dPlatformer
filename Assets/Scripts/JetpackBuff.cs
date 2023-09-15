@@ -8,7 +8,7 @@ public class JetpackBuff : CollectibleItem
 
     private void BuffJetpack()
     {
-        Player.Instance.SetJetpackMaxTimer(jetpackBuffCoef);       
+        PlayersJetpackLogic.Instance.SetJetpackMaxTimer(jetpackBuffCoef);       
     }
 
 

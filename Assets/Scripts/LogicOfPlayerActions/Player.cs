@@ -13,16 +13,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotatingSpeed = 60;
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private float maxMovingSpeedCoef = 1.5f;
-    [SerializeField] private float jetpackForceCoef = 100f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform playerVisual;
-    [SerializeField] private float movementVectorY;
 
 
     private float maxMovingSpeed;
     private float minMovingSpeed = 5f;
-    [SerializeField] private float maxFlyingTimer = 2f;
-    [SerializeField] private float flyingTimer = 0;
 
 
     private bool isRunning;
@@ -66,8 +62,6 @@ public class Player : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true;
             isOnEarth = false;
-
-
         }
 
     }
@@ -92,8 +86,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HandleMovement();
-        JetpackLaunch();
-
     }
 
     public bool GetIsWalking()
@@ -114,17 +106,12 @@ public class Player : MonoBehaviour
         return isOnEarth;
     }
 
-    public void SetJetpackMaxTimer(float jetpackBuff)
-    {
-        this.maxFlyingTimer += jetpackBuff;
-    }
-    public float GetJetpackMaxTimer()
-    {
-
-        return maxFlyingTimer;
-    }
-
     public bool SetWalking(bool parameter)
+    {
+        isWalking = parameter;
+        return isWalking;
+    }
+    public bool SetIsFlying(bool parameter)
     {
         isWalking = parameter;
         return isWalking;
@@ -134,7 +121,6 @@ public class Player : MonoBehaviour
     {
         isJumping = false;
         isOnEarth = true;
-
     }
 
     private void HandleMovement()
@@ -149,47 +135,7 @@ public class Player : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotatingSpeed * Time.deltaTime);
         }
-
-
     }
-
-    private void JetpackLaunch()
-    {
-        movementVectorY = GameInput.Instance.GetMovementVectorNormalized().y;
-        if (movementVectorY >= 0.1 && !isFlying && flyingTimer <= 0.1 && !isOnEarth)
-        {
-            isFlying = true;
-        }
-
-        if (isFlying)
-        {
-
-            Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-            Vector3 moveDir = new(0f, inputVector.y, 0f);
-            transform.position += jetpackForceCoef * Time.deltaTime * moveDir;
-            flyingTimer += Time.deltaTime;
-            if (flyingTimer > maxFlyingTimer)
-            {
-                isFlying = false;
-            }
-
-        }
-        else if (!isFlying)
-        {
-            if (flyingTimer > 0)
-            {
-                flyingTimer -= Time.deltaTime;
-            }
-            else
-            {
-                flyingTimer = 0;
-            }
-
-        }
-
-    }
-
-
 
     private void OnDestroy()
     {
