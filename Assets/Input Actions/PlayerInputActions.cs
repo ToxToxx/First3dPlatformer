@@ -53,6 +53,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Save"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa67e352-1061-48a7-855d-9343c3e358aa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Load"",
+                    ""type"": ""Button"",
+                    ""id"": ""be0f7d8f-d9c1-4653-a887-424f3c510b1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +150,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4cbfaa1e-aa99-48b3-8c02-ed8d5c04bc8c"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7460386-0fac-4017-aff3-3f3c5889a532"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Load"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +183,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
+        m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +249,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Save;
+    private readonly InputAction m_Player_Load;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -214,6 +258,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Save => m_Wrapper.m_Player_Save;
+        public InputAction @Load => m_Wrapper.m_Player_Load;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +278,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Save.started += instance.OnSave;
+            @Save.performed += instance.OnSave;
+            @Save.canceled += instance.OnSave;
+            @Load.started += instance.OnLoad;
+            @Load.performed += instance.OnLoad;
+            @Load.canceled += instance.OnLoad;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -245,6 +297,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Save.started -= instance.OnSave;
+            @Save.performed -= instance.OnSave;
+            @Save.canceled -= instance.OnSave;
+            @Load.started -= instance.OnLoad;
+            @Load.performed -= instance.OnLoad;
+            @Load.canceled -= instance.OnLoad;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -267,5 +325,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnSave(InputAction.CallbackContext context);
+        void OnLoad(InputAction.CallbackContext context);
     }
 }

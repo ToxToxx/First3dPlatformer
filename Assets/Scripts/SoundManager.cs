@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     {
         Instance = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         GameInput.Instance.OnSpacePressed += GameInput_OnSpacePressed;

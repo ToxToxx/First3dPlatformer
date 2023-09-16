@@ -128,4 +128,14 @@ public class Player : MonoBehaviour
     {
         OnPlayerDestroyed?.Invoke(this, EventArgs.Empty);
     }
+
+    public PlayerMemento SaveState()
+    {
+        return new PlayerMemento(transform.position);
+    }
+
+    public void RestoreState(PlayerMemento memento)
+    {
+        transform.position = memento.PlayerPoisiton;
+    }
 }
