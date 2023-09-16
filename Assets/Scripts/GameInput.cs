@@ -41,6 +41,8 @@ public class GameInput : MonoBehaviour
 
         playerInputActions.Player.Run.performed -= Run_performed;
         playerInputActions.Player.Jump.performed -= Jump_performed;
+        playerInputActions.Player.Save.performed -= Save_performed;
+        playerInputActions.Player.Load.performed -= Load_performed;
 
         playerInputActions.Dispose();
     }
